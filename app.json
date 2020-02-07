@@ -4,5 +4,8 @@
     "pages/about/about",
     "pages/profile/profile"
   ],
+  "usingComponents": {
+    "my-cpn": "/components/my-cpn/my-cpn"
+  },
   "sitemapLocation": "sitemap.json"
 }
