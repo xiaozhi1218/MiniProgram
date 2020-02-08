@@ -2,6 +2,7 @@
   "usingComponents": {
     "w-swiper": "/components/w-swiper/w-swiper",
     "w-popular": "./childCpns/w-popular/w-popular",
+    "w-goods": "./childCpns/w-goods/w-goods",
     "w-recommend": "./childCpns/w-recommend/w-recommend",
     "w-tab-control": "/components/w-tab-control/w-tab-control"
   },

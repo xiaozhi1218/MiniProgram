@@ -10,3 +10,6 @@
 
 <!-- 4.tab-control -->
 <w-tab-control titles="{{titles}}" bind:tabclick="handleTabClick"></w-tab-control>
+
+<!-- 5.展示商品数据 -->
+<w-goods goods="{{goods[currentType].list}}"></w-goods>
