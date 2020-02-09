@@ -3,13 +3,24 @@
 <w-swiper list="{{banners}}"></w-swiper>
 
 <!-- 2.推荐数据的展示 -->
-<w-recommend recommends="{{recommends}}"></w-recommend>
+<w-recommend recommends="{{recommends}}" bind:imageload="handleImageLoad"></w-recommend>
 
 <!-- 3.展示本周流行 -->
 <w-popular></w-popular>
 
 <!-- 4.tab-control -->
-<w-tab-control titles="{{titles}}" bind:tabclick="handleTabClick"></w-tab-control>
+<w-tab-control titles="{{titles}}" 
+               bind:tabclick="handleTabClick" 
+               class="{{isTabFixed ? 'fixed' : ''}}"
+               id="tab-control"></w-tab-control>
+<w-tab-control titles="{{titles}}" wx:if="{{isTabFixed}}"></w-tab-control>
 
 <!-- 5.展示商品数据 -->
 <w-goods goods="{{goods[currentType].list}}"></w-goods>
+
+<!-- 6.回到顶部 -->
+<!-- hidden属性对于自定义的组件时无效的 -->
+<w-back-top wx:if="{{showBackTop}}"/>
+
+
+

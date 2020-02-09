@@ -6,6 +6,8 @@ import {
 
 const types = ['pop', 'new', 'sell']
 
+const TOP_DISTANCE = 1000
+
 Page({
 
   /**
@@ -29,7 +31,10 @@ Page({
         list: []
       }
     },
-    currentType: 'pop'
+    currentType: 'pop',
+    showBackTop: false,
+    isTabFixed: false,
+    tabScrollTop: 0
   },
 
   /**
@@ -97,6 +102,13 @@ Page({
       currentType: types[index]
     })
   },
+  handleImageLoad() {
+    wx.createSelectorQuery().select('#tab-control')
+      .boundingClientRect(rect => {
+        console.log(rect);
+        this.data.tabScrollTop = rect.top
+      }).exec();
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -106,10 +118,11 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * onShow：页面显示出来时回调的函数
+   * 页面显示是否意味着所有的图片都加载完成
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -137,7 +150,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    // console.log('-------');
+    // 上拉加载更多
+    this._getGoodsData(this.data.currentType)
   },
 
   /**
@@ -145,5 +160,26 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onPageScroll(options) {
+    // 1.取出scrollTop
+    const scrollTop = options.scrollTop
+
+    // 2.修改showBackTop属性
+    // 官方：不要在滚动的函数回调中频繁的调用this.setData
+    const flag1 = scrollTop >= TOP_DISTANCE
+    if (flag1 != this.data.showBackTop) {
+      this.setData({
+        showBackTop: flag1
+      })
+    }
+
+    // 3.修改isTabFixed属性
+    const flag2 = scrollTop >= this.data.tabScrollTop
+    if (flag2 != this.data.isTabFixed) {
+      this.setData({
+        isTabFixed: flag2
+      })
+    }
   }
 })
